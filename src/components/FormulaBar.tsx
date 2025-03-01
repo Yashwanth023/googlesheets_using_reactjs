@@ -41,17 +41,17 @@ const FormulaBar: React.FC<FormulaBarProps> = ({
   };
   
   return (
-    <div className="flex items-center h-10 border-b border-border bg-sheet-toolbar">
-      <div className="flex items-center justify-center w-12 h-full border-r border-border">
-        fx
+    <div className="flex items-center h-8 border-b border-border bg-white">
+      <div className="flex items-center justify-center w-10 h-full border-r border-border">
+        <span className="text-xs text-gray-600">fx</span>
       </div>
-      <div className="flex items-center h-full px-2 text-sm font-medium min-w-[80px] border-r border-border">
+      <div className="flex items-center h-full px-2 text-xs font-medium min-w-[70px] border-r border-border bg-[#f8f9fa]">
         {activeCell ? getCellReference(activeCell.row, activeCell.col) : ""}
       </div>
       <div className="flex-1 h-full">
         <input
           ref={inputRef}
-          className="formula-input w-full h-full"
+          className="formula-input w-full h-full px-2 text-sm focus:outline-none"
           value={value}
           onChange={handleChange}
           onKeyDown={handleKeyDown}
