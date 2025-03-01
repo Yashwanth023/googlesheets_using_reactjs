@@ -1,5 +1,4 @@
-
-import { CellType, CellValue, GridData, Position } from "../types/spreadsheet";
+import { CellType, CellValue, GridData, Position, CellFormatting } from "../types/spreadsheet";
 
 // Convert a column index to a letter (e.g., 0 -> A, 1 -> B, etc.)
 export const indexToColumn = (index: number): string => {
@@ -71,12 +70,12 @@ export const getCellDisplayValue = (cell: CellType): string => {
 };
 
 // Check if a cell has a specific formatting
-export const hasFormatting = (cell: CellType, format: string): boolean => {
+export const hasFormatting = (cell: CellType, format: CellFormatting): boolean => {
   return cell.formatting?.includes(format) || false;
 };
 
 // Add formatting to a cell
-export const addFormatting = (cell: CellType, format: string): CellType => {
+export const addFormatting = (cell: CellType, format: CellFormatting): CellType => {
   const formatting = cell.formatting || [];
   if (!formatting.includes(format)) {
     return {
@@ -88,7 +87,7 @@ export const addFormatting = (cell: CellType, format: string): CellType => {
 };
 
 // Remove formatting from a cell
-export const removeFormatting = (cell: CellType, format: string): CellType => {
+export const removeFormatting = (cell: CellType, format: CellFormatting): CellType => {
   const formatting = cell.formatting || [];
   return {
     ...cell,
@@ -97,7 +96,7 @@ export const removeFormatting = (cell: CellType, format: string): CellType => {
 };
 
 // Toggle formatting on a cell
-export const toggleFormatting = (cell: CellType, format: string): CellType => {
+export const toggleFormatting = (cell: CellType, format: CellFormatting): CellType => {
   return hasFormatting(cell, format)
     ? removeFormatting(cell, format)
     : addFormatting(cell, format);

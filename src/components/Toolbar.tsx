@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
@@ -30,7 +29,7 @@ import {
   ArrowUp,
   ArrowLeft,
   ArrowRight,
-  Percentage,
+  Percent,
   DollarSign,
   Menu
 } from "lucide-react";
@@ -337,7 +336,7 @@ const Toolbar: React.FC<ToolbarProps> = ({
           size="icon"
           className="w-8 h-8"
         >
-          <Percentage className="h-4 w-4" />
+          <Percent className="h-4 w-4" />
         </Button>
         
         <Separator orientation="vertical" className="h-6 mx-1" />
