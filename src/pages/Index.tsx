@@ -24,7 +24,7 @@ const Index = () => {
               alt="Sheets Logo"
               className="h-6 w-6"
             />
-            <h1 className="text-sm font-normal text-gray-700">Untitled spreadsheet</h1>
+            <h1 className="text-sm font-normal text-gray-700">Untitled document</h1>
           </motion.div>
         </div>
       </motion.header>
