@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -13,7 +14,7 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 222.2 47.4% 11.2%;
+    --primary: 221 83% 53%;
     --primary-foreground: 210 40% 98%;
 
     --secondary: 210 40% 96.1%;
@@ -30,72 +31,106 @@
 
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-
+    --ring: 221 83% 53%;
     --radius: 0.5rem;
 
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sheet-header: 0 0% 97%;
+    --sheet-cell: 0 0% 100%;
+    --sheet-cell-selected: 217 92% 95%;
+    --sheet-cell-active: 217 92% 90%;
+    --sheet-toolbar: 0 0% 98%;
   }
 
   .dark {
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    
+    /* ... keep existing code */
   }
-}
 
-@layer base {
   * {
-    @apply border-border;
+    @apply border-border box-border;
   }
 
   body {
     @apply bg-background text-foreground;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 
+      Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  /* Spreadsheet-specific styles */
+  .cell-grid {
+    user-select: none;
+  }
+
+  .cell {
+    border-right: 1px solid hsl(var(--border));
+    border-bottom: 1px solid hsl(var(--border));
+    position: relative;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    transition: all 0.1s ease-out;
+  }
+
+  .cell-selected {
+    background-color: hsl(var(--sheet-cell-selected));
+    z-index: 1;
+  }
+
+  .cell-active {
+    background-color: hsl(var(--sheet-cell-active));
+    z-index: 2;
+  }
+
+  .row-header, .column-header {
+    background-color: hsl(var(--sheet-header));
+    font-weight: 500;
+    font-size: 12px;
+    color: hsl(var(--muted-foreground));
+    user-select: none;
+  }
+
+  .resizer {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 4px;
+    height: 100%;
+    cursor: col-resize;
+    z-index: 3;
+  }
+
+  .row-resizer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 4px;
+    width: 100%;
+    cursor: row-resize;
+    z-index: 3;
+  }
+
+  .formula-input {
+    border: none;
+    outline: none;
+    width: 100%;
+    padding: 0.25rem 0.5rem;
+    font-family: inherit;
+    background: transparent;
+  }
+
+  /* Animation classes */
+  .cell-edit-enter {
+    animation: scale-in 0.15s ease-out;
+  }
+
+  .toolbar-item {
+    @apply rounded-md p-1.5 hover:bg-accent transition-colors duration-200;
+  }
+
+  .dropdown-item {
+    @apply flex items-center px-3 py-2 text-sm rounded-md hover:bg-accent cursor-pointer;
   }
 }
